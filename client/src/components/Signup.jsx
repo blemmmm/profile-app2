@@ -32,7 +32,7 @@ function Signup (props) {
           text: data.message,
           icon: 'success',
         });
-        props.history.push('/profile-app');
+        props.history.push('/');
       } else {
         Swal.fire({
           title: 'ERROR',
@@ -53,53 +53,63 @@ function Signup (props) {
 
   const handleCLick = (e) => {
     e.preventDefault();
-    props.history.push('/profile-app');
+    props.history.push('/');
   };
 
   return (
     <div>
-      <div className="flex justify-center pt-28 pb-6">
+      <div className="flex-justify-center pt-28 pb-6">
         <h1 className="text-5xl">Create your account</h1>
       </div>
-      <div className="flex justify-center pb-5">
+      <div className="flex-justify-center pb-5">
         <h1 className="text-sm text-gray-400">
           It&apos;s free and only takes a minute.
         </h1>
       </div>
-      <div className="flex items-center justify-center pb-2">
-        <form onSubmit={handleSubmit} className="p-5 border border-gray-400 rounded-md w-3/12">
+      <div className="signin-container">
+        <form onSubmit={handleSubmit} className="create-form">
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
+            <label className="input-label" htmlFor="name">
               Full Name
             </label>
             <input
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="input-text"
               id="name"
               type="text"
               placeholder="Full name"
               required
             />
           </div>
-          <div className="mb-4 flex flex-row">
-            <label className="text-gray-700 pr-4">
-              <input type="radio" name="type" value="Admin" onChange={(e) => setType(e.target.value)} required/>
-              <span className="ml-1 text-gray-700 text-sm font-bold">Admin</span>
+          <div className="radio-div">
+            <label className="radio-group">
+              <input
+                type="radio"
+                name="type"
+                value="Admin"
+                onChange={(e) => setType(e.target.value)}
+                required/>
+              <span className="radio-span">Admin</span>
             </label>
-            <label className="text-gray-700">
-              <input type="radio" name="type" value="User" onChange={(e) => setType(e.target.value)} required/>
-              <span className="ml-1 text-gray-700 text-sm font-bold">User</span>
+            <label className="radio-group">
+              <input
+                type="radio"
+                name="type"
+                value="User"
+                onChange={(e) => setType(e.target.value)}
+                required/>
+              <span className="radio-span">User</span>
             </label>
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
+            <label className="input-label" htmlFor="username">
               Username
             </label>
             <input
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="input-text"
               id="username"
               type="text"
               placeholder="username"
@@ -107,13 +117,13 @@ function Signup (props) {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+            <label className="input-label" htmlFor="email">
               Email
             </label>
             <input
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="input-text"
               id="email"
               type="email"
               placeholder="your.email@example.com"
@@ -121,13 +131,13 @@ function Signup (props) {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+            <label className="input-label" htmlFor="password">
               Password
             </label>
             <input
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="input-text"
               id="pw"
               type="password"
               maxLength="128"
@@ -135,7 +145,7 @@ function Signup (props) {
             />
           </div>
           <div className="flex items-center justify-between">
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full">
+            <button className="btn">
               Create
             </button>
           </div>

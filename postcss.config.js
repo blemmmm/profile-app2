@@ -13,3 +13,6 @@ if (process.argv.includes('--production') === true) {
   // @ts-ignore
   postcss_config.plugins.push(cssnano);
 }
+
+
+module.exports = postcss_config;

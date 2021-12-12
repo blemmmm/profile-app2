@@ -1,9 +1,20 @@
-import React from 'react';
-
+import React, { useEffect } from 'react';
+import { Icon } from '@iconify/react';
 
 function Profile (props) {
-
   const { user } = props;
+  const { set_user } = props;
+
+  // useEffect(() => {
+  //   async function fetchSession () {
+  //     const response = await fetch('http://localhost:3001/session');
+  //     const json = await response.json();
+  //     set_user(json);
+  //   }
+  //   fetchSession();
+  // }, [set_user]);
+
+
   const name = user.name.split(' ');
   const first_name = name[0].toString();
 
@@ -17,28 +28,23 @@ function Profile (props) {
 
     const data = await response.json();
     console.log('logout', data);
-    props.history.push('/profile-app');
+    props.history.push('/');
   };
 
   return (
     <div>
-      <nav className="bg-gray-800">
-        <div className="max-w-full mx-auto px-2 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="px-1 font-semibold text-white">
-              {`Hello, ${first_name}!`}
-            </div>
-            <div className="ml-3 relative">
-              <div>
-                <div className="flex-shrink-0 flex items-center font-semibold text-white focus:outline-none">
-                  <button className="py-2 px-4 font-semibold text-white bg-gray-800 hover:bg-gray-600">
-                    <a href="/profile-app" onClick={handleCLick}>
+      <nav>
+        <div className="flex items-center justify-between h-16">
+          <div className="flex flex-row items-center px-1 font-semibold text-white">
+            <Icon icon="gg:profile" />
+            <span>{`Hello, ${first_name}!`}</span>
+          </div>
+          <div className="ml-3 relative">
+            <button className="out-btn">
+              <a href="/" onClick={handleCLick}>
                       Sign out
-                    </a>
-                  </button>
-                </div>
-              </div>
-            </div>
+              </a>
+            </button>
           </div>
         </div>
       </nav>

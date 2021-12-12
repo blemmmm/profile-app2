@@ -7,8 +7,8 @@ const tailwind_config = {
   purge: {
     enabled: process.argv.includes('--production') === true,
     content: [
-      path.join(process.cwd(), './client/src//*.js'),
-      path.join(process.cwd(), './client/src//*.jsx'),
+      path.join(process.cwd(), './client/src/**/*.js'),
+      path.join(process.cwd(), './client/src/**/*.jsx'),
     ],
   },
   variants: {

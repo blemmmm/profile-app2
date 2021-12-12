@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Login from './components/Login';
 import Profile from './components/Profile';
 import Signup from './components/Signup';
@@ -9,8 +9,20 @@ function App () {
   const history = useHistory();
   const [user, setUser] = useState(null);
 
+  useEffect(() => {
+    async function fetchSession () {
+      const response = await fetch('http://localhost:3001/session');
+      const json = await response.json();
+      setUser(json);
+    }
+    fetchSession();
+  }, []);
+
+  console.log(history.pathname);
+  console.log(user);
+
   switch (history.pathname) {
-    case '/profile-app':
+    case '/':
       return (
         <div>
           <HeadProvider>
@@ -19,16 +31,16 @@ function App () {
           <Login history={history} set_user={setUser}/>
         </div>
       );
-    case '/profile-app/Profile':
+    case '/Profile':
       return (
         <div>
           <HeadProvider>
             <Title>{user.name}</Title>
           </HeadProvider>
-          <Profile history={history} user={user}/>
+          <Profile history={history} user={user} set_user={setUser}/>
         </div>
       );
-    case '/profile-app/Signup':
+    case '/Signup':
       return (
         <div>
           <HeadProvider>
@@ -38,6 +50,7 @@ function App () {
         </div>
       );
   }
+
 
   return (
     <div>

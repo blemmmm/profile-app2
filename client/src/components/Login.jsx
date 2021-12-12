@@ -38,7 +38,7 @@ function Login (props) {
         const user = data.user;
         set_user(user);
         Swal.fire({ text: data.message, icon: 'success' });
-        props.history.push('/profile-app/Profile');
+        props.history.push('/Profile');
       }
 
 
@@ -54,18 +54,18 @@ function Login (props) {
 
   const handleCLick = (e) => {
     e.preventDefault();
-    props.history.push('/profile-app/Signup');
+    props.history.push('/Signup');
   };
   return (
     <div>
-      <div className="flex justify-center items-center pt-28 pb-5">
+      <div className="title-container">
         <h1 className="text-5xl">Sign In</h1>
       </div>
-      <div className="flex items-center justify-center flex-col pb-52">
-        <form onSubmit={handleSubmit} className="w-96 p-5 border border-gray-400 rounded-md">
+      <div className="form-container">
+        <form onSubmit={handleSubmit} className="login-form">
           <div className="mb-4">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="input-label"
               htmlFor="email"
             >
             Username
@@ -73,14 +73,14 @@ function Login (props) {
             <input
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="input-text"
               id="username"
               type="text"
             />
           </div>
           <div className="mb-4 pt-5">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="input-label"
               htmlFor="password"
             >
             Password
@@ -88,14 +88,14 @@ function Login (props) {
             <input
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="input-text"
               id="pw"
               type="password"
               maxLength="128"
             />
           </div>
-          <div className="flex items-center justify-between flex-col pt-10">
-            <button className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+          <div className="btn-container">
+            <button className="btn">
             Sign In
             </button>
           </div>

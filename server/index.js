@@ -17,6 +17,7 @@ const html = `
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <link href="/dist/esbuild/esbuild.css" rel="stylesheet">
       <link href="/dist/postcss/postcss.css" rel="stylesheet">
+      <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
   </head>
   <body>
       <div id="root"></div>
@@ -30,13 +31,20 @@ app.register(fastify_static, {
   prefix: '/dist/',
 });
 // @ts-ignore
-app.get('/', async (request, reply) => {
+app.get('/*', async (request, reply) => {
   return reply
     .status(200)
     .header('Content-Type', 'text/html')
     .send(html);
 });
 
+// @ts-ignore
+// app.get('/Profile', async (request, reply) => {
+//   return reply
+//     .status(200)
+//     .header('Content-Type', 'text/html')
+//     .send(html);
+// });
 
 
 // @ts-ignore
@@ -52,6 +60,35 @@ app.register(fastify_session, {
 app.register(fastify_cors, {
   origin: 'http://localhost:3000',
   credentials: true,
+});
+
+// @ts-ignore
+app.get('/session', async (request, reply) => {
+
+  if (typeof request.session.user_id === 'number') {
+    /**
+   * @type {number}
+   */
+    // @ts-ignore
+    const id = request.session.user_id;
+
+    const [user] = await sql`
+    SELECT * FROM "users"
+    WHERE "id" = ${id};
+
+
+  `;
+
+    if (user instanceof Object) {
+    /**
+   * @type {string}
+   */
+      // @ts-ignore
+      return reply.status(200).send(user);
+    }
+  }
+
+  return reply.status(400).send(null);
 });
 
 

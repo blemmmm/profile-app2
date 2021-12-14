@@ -27,6 +27,16 @@ function App () {
 
   switch (history.pathname) {
     case '/':
+      if (user instanceof Object) {
+        return (
+          <div>
+            <HeadProvider>
+              <Title>Profile</Title>
+            </HeadProvider>
+            <Profile history={history} user={user} set_user={set_user}/>
+          </div>
+        );
+      }
       return (
         <div>
           <HeadProvider>
@@ -36,14 +46,16 @@ function App () {
         </div>
       );
     case '/profile':
-      return (
-        <div>
-          <HeadProvider>
-            <Title>Profile</Title>
-          </HeadProvider>
-          <Profile history={history} user={user} set_user={set_user}/>
-        </div>
-      );
+      if (user instanceof Object) {
+        return (
+          <div>
+            <HeadProvider>
+              <Title>Profile</Title>
+            </HeadProvider>
+            <Profile history={history} user={user} set_user={set_user}/>
+          </div>
+        );
+      } return null;
     case '/signup':
       return (
         <div>

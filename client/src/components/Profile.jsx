@@ -1,13 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Icon } from '@iconify/react';
 
 function Profile (props) {
   const { user } = props;
   const { set_user } = props;
 
-
-
   const name = user.name.split(' ');
+  console.log(name);
   const first_name = name[0].toString();
 
   const handleCLick = async (e) => {
@@ -19,6 +18,7 @@ function Profile (props) {
 
     const data = await response.json();
     console.log('logout', data);
+    set_user(null);
     props.history.push('/');
   };
 

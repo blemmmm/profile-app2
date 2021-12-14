@@ -5,7 +5,7 @@ const path = require('path');
 const config_path = path.join(process.cwd(), 'project.config.json');
 const config = JSON.parse(fs.readFileSync(config_path, { encoding: 'utf-8' }));
 
-const sql = postgres('postgres://username:password@host:port/database', {
+const sql = postgres({
   host: config.postgresql_host,
   port: config.postgresql_port,
   database: config.postgresql_database,

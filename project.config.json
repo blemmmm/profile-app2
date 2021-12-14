@@ -1,7 +1,0 @@
-{
-    "postgresql_host": "localhost",
-    "postgresql_port": 5432,
-    "postgresql_database": "profile_app",
-    "postgresql_username": "postgres",
-    "postgresql_password": "1234"
-  }

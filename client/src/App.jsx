@@ -7,13 +7,17 @@ import { HeadProvider, Title } from 'react-head';
 
 function App () {
   const history = useHistory();
-  const [user, setUser] = useState(null);
+  const [user, set_user] = useState(null);
 
   useEffect(() => {
     async function fetchSession () {
-      const response = await fetch('http://localhost:3001/session');
-      const json = await response.json();
-      setUser(json);
+      const response = await fetch('http://localhost:3001/session', {
+        method: 'GET',
+        credentials: 'include',
+      });
+
+      const data = await response.json();
+      set_user(data);
     }
     fetchSession();
   }, []);
@@ -28,19 +32,19 @@ function App () {
           <HeadProvider>
             <Title>Sign In</Title>
           </HeadProvider>
-          <Login history={history} set_user={setUser}/>
+          <Login history={history} set_user={set_user}/>
         </div>
       );
-    case '/Profile':
+    case '/profile':
       return (
         <div>
           <HeadProvider>
-            <Title>{user.name}</Title>
+            <Title>Profile</Title>
           </HeadProvider>
-          <Profile history={history} user={user} set_user={setUser}/>
+          <Profile history={history} user={user} set_user={set_user}/>
         </div>
       );
-    case '/Signup':
+    case '/signup':
       return (
         <div>
           <HeadProvider>

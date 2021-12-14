@@ -140,6 +140,7 @@ function Signup (props) {
               className="input-text"
               id="pw"
               type="password"
+              minLength="6"
               maxLength="128"
               required
             />

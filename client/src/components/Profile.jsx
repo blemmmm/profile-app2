@@ -5,14 +5,6 @@ function Profile (props) {
   const { user } = props;
   const { set_user } = props;
 
-  // useEffect(() => {
-  //   async function fetchSession () {
-  //     const response = await fetch('http://localhost:3001/session');
-  //     const json = await response.json();
-  //     set_user(json);
-  //   }
-  //   fetchSession();
-  // }, [set_user]);
 
 
   const name = user.name.split(' ');
@@ -22,7 +14,6 @@ function Profile (props) {
     e.preventDefault();
     const response = await fetch('http://localhost:3001/logout', {
       method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
     });
 

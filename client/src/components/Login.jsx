@@ -38,7 +38,7 @@ function Login (props) {
         const user = data.user;
         set_user(user);
         Swal.fire({ text: data.message, icon: 'success' });
-        props.history.push('/Profile');
+        props.history.push('/profile');
       }
 
 
@@ -54,7 +54,7 @@ function Login (props) {
 
   const handleCLick = (e) => {
     e.preventDefault();
-    props.history.push('/Signup');
+    props.history.push('/signup');
   };
   return (
     <div>
@@ -103,7 +103,7 @@ function Login (props) {
         <div className="flex justify-center m-4">
           <h1 className="text-sm text-gray-400">
             Not yet registered?&nbsp;
-            <a className="hover:text-blue-400" href="/Signup" onClick={handleCLick}>
+            <a className="hover:text-blue-400" href="/signup" onClick={handleCLick}>
             Click here to sign up.
             </a>
           </h1>

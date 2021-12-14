@@ -71,6 +71,7 @@ app.get('/session', async (request, reply) => {
    */
     // @ts-ignore
     const id = request.session.user_id;
+    console.log(request.session.sessionId);
 
     const [user] = await sql`
     SELECT * FROM "users"
@@ -88,7 +89,7 @@ app.get('/session', async (request, reply) => {
     }
   }
 
-  return reply.status(400).send(null);
+  return reply.status(200).send(null);
 });
 
 
@@ -100,7 +101,7 @@ app.post('/sign-up', async (request, reply) => {
   const username = request.body.username;
   assert(typeof username === 'string');
 
-  const [existing_user] = await sql`
+  const [existing_user_from_username] = await sql`
     SELECT "username" FROM "users"
     WHERE "username" = ${username};
   `;
@@ -112,17 +113,17 @@ app.post('/sign-up', async (request, reply) => {
   const email = request.body.email;
   assert(typeof username === 'string');
 
-  const [existing_email] = await sql`
+  const [existing_user_from_email] = await sql`
     SELECT "email" FROM "users"
     WHERE "email" = ${email};
   `;
 
-  if (existing_user instanceof Object) {
+  if (existing_user_from_username instanceof Object) {
     return reply.status(400).send({
       message: 'Username already exists.',
       statusCode: 400,
     });
-  } else if (existing_email instanceof Object) {
+  } else if (existing_user_from_email instanceof Object) {
     return reply.status(400).send({
       message: 'Email already exists.',
       statusCode: 400,
@@ -160,11 +161,9 @@ app.post('/sign-up', async (request, reply) => {
     assert(typeof user_type === 'string');
 
 
-    await sql `INSERT INTO "users" (name, email, username, password)
-    VALUES (${name}, ${user_email}, ${user_name}, ${password}); `;
+    await sql `INSERT INTO "users" (name, email, username, password, user_role, user_created)
+    VALUES (${name}, ${user_email}, ${user_name}, ${password}, ${user_type}, ${Date.now()}); `;
 
-    await sql ` INSERT INTO "roles" (code, name)
-    VALUES (${user_type}, ${name}); `;
 
     return reply.status(200).send({ message: 'You have created your account.', statusCode: 200 });
   }

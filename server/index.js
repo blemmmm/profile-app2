@@ -38,14 +38,6 @@ app.get('/*', async (request, reply) => {
     .send(html);
 });
 
-// @ts-ignore
-// app.get('/Profile', async (request, reply) => {
-//   return reply
-//     .status(200)
-//     .header('Content-Type', 'text/html')
-//     .send(html);
-// });
-
 
 // @ts-ignore
 app.register(fastify_cookie);
@@ -121,12 +113,10 @@ app.post('/sign-up', async (request, reply) => {
   if (existing_user_from_username instanceof Object) {
     return reply.status(400).send({
       message: 'Username already exists.',
-      statusCode: 400,
     });
   } else if (existing_user_from_email instanceof Object) {
     return reply.status(400).send({
       message: 'Email already exists.',
-      statusCode: 400,
     });
   } else {
     /**
@@ -165,7 +155,7 @@ app.post('/sign-up', async (request, reply) => {
     VALUES (${name}, ${user_email}, ${user_name}, ${password}, ${user_type}, ${Date.now()}); `;
 
 
-    return reply.status(200).send({ message: 'You have created your account.', statusCode: 200 });
+    return reply.status(200).send({ message: 'You have created your account.' });
   }
 
 
@@ -174,14 +164,13 @@ app.post('/sign-up', async (request, reply) => {
 
 app.post('/sign-in', async (request, reply) => {
 
-  const response = { user: null, message: null, statusCode: null };
+  const response = { user: null, message: null };
   /**
    * @type {string}
    */
   // @ts-ignore
   if (typeof request.session.user_id === 'number') {
     response.message = 'Already logged-in.';
-    response.statusCode = 400;
     return reply.status(400).send(response);
   }
 
@@ -214,13 +203,11 @@ app.post('/sign-in', async (request, reply) => {
     request.session.user_id = user.id;
     response.user = user;
     response.message = 'Authentication success.';
-    response.statusCode = 200;
     console.log(response);
     return reply.status(200).send(response);
   }
 
   response.message = 'Authentication failed.';
-  response.statusCode = 400;
   return reply.status(400).send(response);
 });
 

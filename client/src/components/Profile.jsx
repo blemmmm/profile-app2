@@ -2,6 +2,7 @@ import React from 'react';
 import { Icon } from '@iconify/react';
 
 function Profile (props) {
+  props.history.push('/profile');
   const { user } = props;
   const { set_user } = props;
 

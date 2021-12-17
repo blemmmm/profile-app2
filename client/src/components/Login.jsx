@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 // import assert from 'assert';
 
 function Login (props) {
+  props.history.push('/');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const { set_user } = props;
@@ -27,7 +28,7 @@ function Login (props) {
       // assert(data instanceof Object);
 
 
-      if (data.statusCode === 400) {
+      if (response.status >= 400) {
         Swal.fire({
           title: 'ERROR',
           text: data.message,

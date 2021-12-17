@@ -22,16 +22,13 @@ function App () {
     fetchSession();
   }, []);
 
-  console.log(history.pathname);
-  console.log(user);
-
   switch (history.pathname) {
     case '/':
       if (user instanceof Object) {
         return (
           <div>
             <HeadProvider>
-              <Title>Profile</Title>
+              <Title>{user.name}</Title>
             </HeadProvider>
             <Profile history={history} user={user} set_user={set_user}/>
           </div>
@@ -50,13 +47,31 @@ function App () {
         return (
           <div>
             <HeadProvider>
-              <Title>Profile</Title>
+              <Title>{user.name}</Title>
             </HeadProvider>
             <Profile history={history} user={user} set_user={set_user}/>
           </div>
         );
-      } return null;
+      }
+      return (
+        <div>
+          <HeadProvider>
+            <Title>Sign In</Title>
+          </HeadProvider>
+          <Login history={history} set_user={set_user}/>
+        </div>
+      );
     case '/signup':
+      if (user instanceof Object) {
+        return (
+          <div>
+            <HeadProvider>
+              <Title>{user.name}</Title>
+            </HeadProvider>
+            <Profile history={history} user={user} set_user={set_user}/>
+          </div>
+        );
+      }
       return (
         <div>
           <HeadProvider>

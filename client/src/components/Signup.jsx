@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 
 function Signup (props) {
+  props.history.push('/signup');
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -26,7 +27,7 @@ function Signup (props) {
       const data = await response.json();
       console.log(data);
 
-      if (data.statusCode === 200) {
+      if (response.status === 200) {
         Swal.fire({
           title: 'Congratulations!',
           text: data.message,

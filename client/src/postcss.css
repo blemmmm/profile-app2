@@ -68,7 +68,7 @@ nav {
 }
 
 .out-btn {
-    @apply py-2 px-4 font-semibold text-white bg-gray-800 rounded-sm;
+    @apply w-full p-4 font-semibold text-white bg-gray-800 rounded-sm;
 }
 
 .out-btn:hover {
@@ -96,4 +96,14 @@ nav {
 .section-header {
     @apply px-2 py-2 border-b-4 font-bold text-2xl;
 }
+
+.image-group {
+    @apply flex flex-row justify-center;
+}
+
+
+.menu {
+   @apply bg-gray-800 absolute right-0 w-48 py-2 mt-2 shadow-xl;
+}
+
 

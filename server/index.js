@@ -63,7 +63,6 @@ app.get('/session', async (request, reply) => {
    */
     // @ts-ignore
     const id = request.session.user_id;
-    console.log(request.session.sessionId);
 
     const [user] = await sql`
     SELECT * FROM "users"

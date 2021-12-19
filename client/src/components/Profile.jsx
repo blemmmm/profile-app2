@@ -36,13 +36,25 @@ function Profile (props) {
       </nav>
       <main className="profile-container">
         <div className="flex-justify-center flex-col items-center my-4">
-          <img className="rounded-full my-4" width="300" height="300" src="https://source.unsplash.com/random/300x300?cats" />
-          <h1 className="font-black text-4xl">{user.name}</h1>
+          <img className="rounded-full my-4" width="300" height="300" src="https://source.unsplash.com/random/300x300?puppy" />
+          <h1 className="font-black text-5xl">{user.name}</h1>
         </div>
+        <section>
+          <h1 className="section-header">add bio here</h1>
+        </section>
+        <section>
+          <h1 className="section-header">education</h1>
+        </section>
+        <section>
+          <h1 className="section-header">work</h1>
+        </section>
+        <section>
+          <h1 className="section-header">favorites</h1>
+        </section>
+        <section>
+          <h1 className="section-header">random image gallery</h1>
+        </section>
 
-        <h1>{user.email}</h1>
-        <h1>{user.username}</h1>
-        <h1>{user.created_at}</h1>
       </main>
     </div>
   );

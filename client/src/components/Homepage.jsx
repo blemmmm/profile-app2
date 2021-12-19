@@ -3,6 +3,7 @@ import { Icon } from '@iconify/react';
 
 function Homepage (props) {
 
+  const unsplashUrl = 'https://source.unsplash.com/collection/8207796/catto-doggo';
   const handleSignIn = () => props.history.push('/signin');
   const handleSignUp = () => props.history.push('/signup');
 
@@ -20,6 +21,9 @@ function Homepage (props) {
           </div>
         </div>
       </nav>
+      <main>
+        <div className="bg-image" style={{ backgroundImage: `url(${unsplashUrl})` }}></div>
+      </main>
     </div>
   );
 }

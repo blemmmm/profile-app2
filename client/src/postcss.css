@@ -83,3 +83,13 @@ nav {
     @apply ring-2 ring-offset-0 ring-blue-400;
 }
 
+.bg-image {
+    @apply w-full h-full bg-no-repeat bg-center bg-cover fixed;
+}
+
+.profile-container {
+    max-width: 1024px;
+    width: 100%;
+    margin: 0 auto;
+}
+

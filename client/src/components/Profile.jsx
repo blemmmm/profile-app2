@@ -2,12 +2,10 @@ import React from 'react';
 import { Icon } from '@iconify/react';
 
 function Profile (props) {
-  props.history.push('/profile');
   const { user } = props;
   const { set_user } = props;
 
   const name = user.name.split(' ');
-  console.log(name);
   const first_name = name[0].toString();
 
   const handleCLick = async (e) => {
@@ -29,14 +27,10 @@ function Profile (props) {
         <div className="flex items-center justify-between h-16">
           <div className="flex flex-row items-center px-1 font-semibold text-white">
             <Icon icon="gg:profile" />
-            <span>{`Hello, ${first_name}!`}</span>
+            <span className="pl-1">{`Hello, ${first_name}!`}</span>
           </div>
           <div className="ml-3 relative">
-            <button className="out-btn">
-              <a href="/" onClick={handleCLick}>
-                      Sign out
-              </a>
-            </button>
+            <button className="out-btn" onClick={handleCLick}>Sign out</button>
           </div>
         </div>
       </nav>

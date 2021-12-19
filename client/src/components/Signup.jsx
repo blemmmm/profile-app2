@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 
 function Signup (props) {
-  props.history.push('/signup');
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -33,7 +32,7 @@ function Signup (props) {
           text: data.message,
           icon: 'success',
         });
-        props.history.push('/');
+        props.history.push('/signin');
       } else {
         Swal.fire({
           title: 'ERROR',
@@ -54,7 +53,7 @@ function Signup (props) {
 
   const handleCLick = (e) => {
     e.preventDefault();
-    props.history.push('/');
+    props.history.push('/signin');
   };
 
   return (

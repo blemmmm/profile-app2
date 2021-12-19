@@ -48,7 +48,7 @@
 }
 
 .create-form {
-    @apply p-5 border border-gray-400 rounded-md w-3/12;
+    @apply p-5 border border-gray-400 rounded-md w-3/4 lg:w-3/12 sm:w-9/12;
 }
 
 .radio-div {
@@ -68,10 +68,18 @@ nav {
 }
 
 .out-btn {
-    @apply py-2 px-4 font-semibold text-white bg-gray-800;
+    @apply py-2 px-4 font-semibold text-white bg-gray-800 rounded-sm;
 }
 
 .out-btn:hover {
     @apply bg-gray-600;
+}
+
+.up-btn {
+    @apply py-2 px-4 ml-2 font-semibold text-black bg-white rounded-sm;
+}
+
+.up-btn:hover {
+    @apply ring-2 ring-offset-0 ring-blue-400;
 }
 

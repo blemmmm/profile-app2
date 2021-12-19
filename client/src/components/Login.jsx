@@ -3,7 +3,6 @@ import Swal from 'sweetalert2';
 // import assert from 'assert';
 
 function Login (props) {
-  props.history.push('/');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const { set_user } = props;
@@ -38,7 +37,6 @@ function Login (props) {
       } else {
         const user = data.user;
         set_user(user);
-        Swal.fire({ text: data.message, icon: 'success' });
         props.history.push('/profile');
       }
 

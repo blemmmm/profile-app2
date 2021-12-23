@@ -18,7 +18,7 @@ function Profile (props) {
   const renderFriends = friends.map((img, index) => {
     return <img
       key={index}
-      className="mx-1 my-1"
+      className="relative z-30 inline object-cover w-16 h-16 border-2 border-white rounded-full"
       width="75"
       height="75"
       src={img}
@@ -78,15 +78,15 @@ function Profile (props) {
           <img className="rounded-full my-4" width="300" height="300" src="https://source.unsplash.com/random/300x300?puppy" alt="profile picture" />
           <h4 className="text-gray-500">@{user.username}</h4>
           <h1 className="font-black text-5xl mb-4">{user.name}</h1>
-          <h1 className="">✨just a bio✨</h1>
+          <h1 className="">{user.bio}</h1>
         </div>
         <section>
           <h1 className="section-header">About me</h1>
-          <p className="items-center">No information provided.</p>
+          <p className="items-center">{user.about_me ? user.about_me : 'No information provided.'}</p>
         </section>
         <section>
           <h1 className="section-header">Favorites</h1>
-          <p className="items-center">No information provided.</p>
+          <p className="items-center">{user.favorites ? user.favorites : 'No information provided.'}</p>
         </section>
         <section>
           <h1 className="section-header">{`Friends (${randomNum})`}</h1>

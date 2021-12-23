@@ -67,11 +67,15 @@ nav {
     @apply bg-gray-800 max-w-full mx-auto px-2 sm:px-6 lg:px-8;
 }
 
+.in-btn {
+    @apply py-2 px-4 ml-2 font-semibold text-white bg-gray-800 rounded-sm;
+}
+
 .out-btn {
     @apply w-full p-4 font-semibold text-white bg-gray-800 rounded-sm;
 }
 
-.out-btn:hover {
+.out-btn:hover, .in-btn:hover {
     @apply bg-gray-600;
 }
 
@@ -101,9 +105,33 @@ nav {
     @apply flex flex-row justify-center;
 }
 
-
 .menu {
    @apply bg-gray-800 absolute right-0 w-48 py-2 mt-2 shadow-xl;
 }
+
+.input-text-with-icon {
+    @apply w-full py-2 pl-7 pr-3 text-gray-700 border rounded leading-tight;
+}
+
+.input-icon {
+    @apply absolute inset-y-0 left-0 flex items-center px-2 font-bold text-base text-gray-400;
+}
+
+.textarea {
+    @apply w-full h-16 px-3 py-2 my-1 text-base text-gray-700 placeholder-gray-600 border rounded;
+}
+
+.cancel-btn {
+    @apply border-2 border-gray-400 text-gray-700 font-bold px-4 py-4 mr-2 rounded;
+}
+
+.save-btn {
+    @apply bg-black text-white font-bold px-4 py-4 rounded;
+}
+
+.cancel-btn:hover {
+    @apply bg-gray-100
+}
+
 
 

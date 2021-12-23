@@ -16,7 +16,7 @@ function Homepage (props) {
             <span className="pl-1">Profile App</span>
           </div>
           <div className="ml-3 relative">
-            <button className="out-btn pr-3" onClick={handleSignIn}>Sign in</button>
+            <button className="in-btn" onClick={handleSignIn}>Sign in</button>
             <button className="up-btn" onClick={handleSignUp}>Create an Account</button>
           </div>
         </div>

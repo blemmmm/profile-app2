@@ -65,8 +65,8 @@ app.get('/session', async (request, reply) => {
     const id = request.session.user_id;
 
     const [user] = await sql`
-    SELECT * FROM "users"
-    WHERE "id" = ${id};
+    SELECT * FROM "users", "profile"
+    WHERE users.id = ${id};
 
 
   `;
@@ -208,6 +208,45 @@ app.post('/sign-in', async (request, reply) => {
 
   response.message = 'Authentication failed.';
   return reply.status(400).send(response);
+});
+
+app.post('/edit', async (request, reply) => {
+  /**
+   * @type {string}
+   */
+  // @ts-ignore
+  const username = request.body.username;
+  const name = request.body.name;
+  const bio = request.body.bio;
+  const about_me = request.body.about_me;
+  const favorites = request.body.favorites;
+
+
+  if (typeof request.session.user_id === 'number') {
+    /**
+   * @type {number}
+   */
+    // @ts-ignore
+    const user_id = request.session.user_id;
+
+    console.log('BIO', bio);
+
+    await sql `UPDATE "profile" 
+    SET time_updated = ${Date.now()}, 
+    bio = ${bio}, 
+    about_me = ${about_me}, 
+    favorites = ${favorites} 
+    WHERE user_id = ${user_id}`;
+
+    return reply.status(200).send({ message: 'Profile Updated.' });
+  }
+
+
+
+
+
+  return reply.status(200).send({ message: 'Profile Updated.' });
+
 });
 
 

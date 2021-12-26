@@ -41,7 +41,7 @@ function ProfileEdit (props) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           'username': username,
-          'name': name,
+          'name': profile_name,
           'bio': bio,
           'about_me': about_me,
           'favorites': favorites,
@@ -50,6 +50,7 @@ function ProfileEdit (props) {
       const data = await response.json();
 
       if (response.status === 200) {
+        set_user(data.user);
         Swal.fire({
           text: data.message,
           icon: 'success',
@@ -100,14 +101,16 @@ function ProfileEdit (props) {
         )}
       </nav>
       <main className="profile-container">
+        <div className="flex-justify-center flex-col items-center my-4">
+          <div className="relative">
+            <img className="rounded-full my-4" width="300" height="300" src="https://source.unsplash.com/random/300x300?puppy" alt="profile picture" />
+            <button className="absolute inset-3/4 inline-flex items-center justify-center w-12 h-12 mr-2 text-gray-700 bg-gray-100 rounded-full hover:bg-gray-200">
+              <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path></svg>
+            </button>
+          </div>
+        </div>
         <form onSubmit={handleSubmit}>
           <div className="flex-justify-center flex-col items-center my-4">
-            <div className="relative">
-              <img className="rounded-full my-4" width="300" height="300" src="https://source.unsplash.com/random/300x300?puppy" alt="profile picture" />
-              <button className="absolute inset-3/4 inline-flex items-center justify-center w-12 h-12 mr-2 text-gray-700 bg-gray-100 rounded-full hover:bg-gray-200">
-                <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path></svg>
-              </button>
-            </div>
             <div className="flex flex-col justify-between">
               <div className="flex flex-row items-center justify-between">
                 <label className="font-bold pr-4" htmlFor="email" > Username </label>

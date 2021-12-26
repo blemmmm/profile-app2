@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Icon } from '@iconify/react';
+import { useEffect } from 'react/cjs/react.development';
 
 function Profile (props) {
   const [menu, set_menu] = useState(false);
@@ -40,7 +41,6 @@ function Profile (props) {
     });
 
     const data = await response.json();
-    console.log('logout', data);
     set_user(null);
     props.history.push('/');
   };

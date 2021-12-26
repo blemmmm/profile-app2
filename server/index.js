@@ -65,8 +65,8 @@ app.get('/session', async (request, reply) => {
     const id = request.session.user_id;
 
     const [user] = await sql`
-    SELECT * FROM "users", "profile"
-    WHERE users.id = ${id};
+    SELECT * FROM "users"
+    WHERE id = ${id};
 
 
   `;
@@ -76,6 +76,7 @@ app.get('/session', async (request, reply) => {
    * @type {string}
    */
       // @ts-ignore
+      console.log(user);
       return reply.status(200).send(user);
     }
   }
@@ -150,8 +151,8 @@ app.post('/sign-up', async (request, reply) => {
     assert(typeof user_type === 'string');
 
 
-    await sql `INSERT INTO "users" (name, email, username, password, user_role, user_created)
-    VALUES (${name}, ${user_email}, ${user_name}, ${password}, ${user_type}, ${Date.now()}); `;
+    await sql `INSERT INTO "users" (name, email, username, password, user_role, user_created, bio, favorites, about_me)
+    VALUES (${name}, ${user_email}, ${user_name}, ${password}, ${user_type}, ${Date.now()}, '', '', ''); `;
 
 
     return reply.status(200).send({ message: 'You have created your account.' });
@@ -231,12 +232,14 @@ app.post('/edit', async (request, reply) => {
 
     console.log('BIO', bio);
 
-    await sql `UPDATE "profile" 
+    await sql `UPDATE "users" 
     SET time_updated = ${Date.now()}, 
     bio = ${bio}, 
     about_me = ${about_me}, 
-    favorites = ${favorites} 
-    WHERE user_id = ${user_id}`;
+    favorites = ${favorites},
+    username = ${username},
+    name = ${name} 
+    WHERE id = ${user_id}`;
 
     return reply.status(200).send({ message: 'Profile Updated.' });
   }
@@ -245,7 +248,7 @@ app.post('/edit', async (request, reply) => {
 
 
 
-  return reply.status(200).send({ message: 'Profile Updated.' });
+  return reply.status(200).send(null);
 
 });
 

@@ -10,29 +10,37 @@ function App () {
   const history = useHistory();
   const [user, set_user] = useState(null);
 
-  useEffect(() => {
-    async function fetchSession () {
-      const response = await fetch('http://localhost:3001/session', {
-        method: 'GET',
-        credentials: 'include',
-      });
 
-      const data = await response.json();
-      set_user(data);
-    }
-    fetchSession();
-  }, []);
 
   useEffect(() => {
     console.log(history.pathname, history.previous_pathname);
+    console.log('user:', user);
   });
+
+  async function fetchSession () {
+    const response = await fetch('http://localhost:3001/session', {
+      method: 'GET',
+      credentials: 'include',
+    });
+
+    const data = await response.json();
+
+    return data;
+  }
+
+  useEffect(() => {
+    if (!user) {
+      fetchSession().then((data) => set_user(data));
+    }
+  }, [user]);
+
+
 
 
   useEffect(() => {
     switch (history.pathname) {
       case '/': {
         if (user instanceof Object) {
-          history.replace('/profile');
           document.title = user.name;
         } else {
           document.title = 'Profile App';
@@ -40,7 +48,6 @@ function App () {
       } break;
       case '/signin': {
         if (user instanceof Object) {
-          history.replace('/profile');
           document.title = user.name;
         } else {
           document.title = 'Sign In';
@@ -49,15 +56,10 @@ function App () {
       case '/profile': {
         if (user instanceof Object) {
           document.title = user.name;
-        } else if (history.pathname === '/profile' && history.previous_pathname === null) {
-          history.replace('/profile');
-        } else {
-          history.replace('/');
         }
       } break;
       case '/signup': {
         if (user instanceof Object) {
-          history.replace('/profile');
           document.title = user.name;
         } else {
           document.title = 'Sign Up';
@@ -66,11 +68,6 @@ function App () {
       case '/edit': {
         if (user instanceof Object) {
           document.title = 'Edit Profile';
-        } else if (history.pathname === '/edit' && history.previous_pathname === null) {
-          history.replace('/edit');
-        }
-        else {
-          history.replace('/');
         }
       } break;
       default: {
@@ -81,6 +78,13 @@ function App () {
 
   switch (history.pathname) {
     case '/': {
+      if (user instanceof Object) {
+        return (
+          <div>
+            <Profile history={history} user={user} set_user={set_user}/>
+          </div>
+        );
+      }
       return (
         <div>
           <Homepage history={history}/>
@@ -88,6 +92,13 @@ function App () {
       );
     }
     case '/signin': {
+      if (user instanceof Object) {
+        return (
+          <div>
+            <Profile history={history} user={user} set_user={set_user}/>
+          </div>
+        );
+      }
       return (
         <div>
           <Login history={history} set_user={set_user}/>
@@ -101,9 +112,20 @@ function App () {
             <Profile history={history} user={user} set_user={set_user}/>
           </div>
         );
-      } return null;
+      } return (
+        <div>
+          <Homepage history={history}/>
+        </div>
+      );
     }
     case '/signup': {
+      if (user instanceof Object) {
+        return (
+          <div>
+            <Profile history={history} user={user} set_user={set_user}/>
+          </div>
+        );
+      }
       return (
         <div>
           <Signup history={history}/>
@@ -117,7 +139,11 @@ function App () {
             <ProfileEdit history={history} user={user} set_user={set_user}/>
           </div>
         );
-      } return null;
+      } return (
+        <div>
+          <Homepage history={history}/>
+        </div>
+      );
     }
     default: {
       <div>

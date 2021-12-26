@@ -84,6 +84,24 @@ app.get('/session', async (request, reply) => {
   return reply.status(200).send(null);
 });
 
+app.get('/users', async (request, reply) => {
+
+  const users = await sql`
+    SELECT * FROM "users"
+    WHERE user_role = 'User';`;
+
+  if (users instanceof Object) {
+    /**
+   * @type {string}
+   */
+    // @ts-ignore
+    return reply.status(200).send(users);
+  }
+
+
+  return reply.status(200).send(null);
+});
+
 
 app.post('/sign-up', async (request, reply) => {
   /**
@@ -229,26 +247,48 @@ app.post('/edit', async (request, reply) => {
    */
     // @ts-ignore
     const user_id = request.session.user_id;
+    const [existing_user_from_username] = await sql`
+    SELECT "username" FROM "users"
+    WHERE "username" = ${username};
+  `;
 
-    console.log('BIO', bio);
-
-    await sql `UPDATE "users" 
-    SET time_updated = ${Date.now()}, 
-    bio = ${bio}, 
-    about_me = ${about_me}, 
-    favorites = ${favorites},
-    username = ${username},
-    name = ${name} 
-    WHERE id = ${user_id}`;
-
-    return reply.status(200).send({ message: 'Profile Updated.' });
+    if (existing_user_from_username) {
+      return reply.status(400).send({ message: 'Username already exists.' });
+    } else {
+      await sql `UPDATE "users" 
+      SET time_updated = ${Date.now()}, 
+      bio = ${bio}, 
+      about_me = ${about_me}, 
+      favorites = ${favorites},
+      username = ${username},
+      name = ${name} 
+      WHERE id = ${user_id}`;
+      return reply.status(200).send({ message: 'Profile Updated.' });
+    }
   }
 
+  return reply.status(400).send({ message: 'Error' });
+
+});
+
+app.post('/delete', async (request, reply) => {
+  /**
+   * @type {string}
+   */
+  // @ts-ignore
+  const id = request.body.id;
+
+  await sql `DELETE FROM "users"
+  WHERE id = ${id};`;
+
+  const users = await sql`
+    SELECT * FROM "users"
+    WHERE user_role = 'User';`;
 
 
 
 
-  return reply.status(200).send(null);
+  return reply.status(200).send({ users, message: 'User has been deleted.' });
 
 });
 

@@ -37,7 +37,12 @@ function Login (props) {
       } else {
         const user = data.user;
         set_user(user);
-        props.history.push('/profile');
+        if (user.user_role === 'Admin') {
+          props.history.push('/admin');
+        } else {
+          props.history.push('/profile');
+        }
+
       }
 
 

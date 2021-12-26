@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
-import { Icon } from '@iconify/react';
-import { useEffect } from 'react/cjs/react.development';
 
 function Profile (props) {
-  const [menu, set_menu] = useState(false);
   const [randomNum] = useState(Math.floor(Math.random() * 10) + 1);
   const { user } = props;
-  const { set_user } = props;
 
-  const name = user.name.split(' ');
-  const first_name = name[0].toString();
+
+
 
   const friends = new Array(randomNum);
   for (let i = 0; i < friends.length; i++) {
@@ -28,51 +24,9 @@ function Profile (props) {
 
   });
 
-  const handleEdit = () => {
-    props.history.push('/edit');
-  };
-
-
-  const handleSignOut = async (e) => {
-    e.preventDefault();
-    const response = await fetch('http://localhost:3001/logout', {
-      method: 'GET',
-      credentials: 'include',
-    });
-
-    const data = await response.json();
-    set_user(null);
-    props.history.push('/');
-  };
-
 
   return (
     <div>
-      <nav>
-        <div className="flex items-center justify-between h-16">
-          <div className="flex flex-row items-center px-1 font-semibold text-white">
-            <Icon icon="gg:profile" />
-            <span className="pl-1">{`Hello, ${first_name}!`}</span>
-          </div>
-          <div className="ml-3 relative">
-            <button className="text-white" onClick={() => set_menu(!menu)}><Icon icon="ls:dropdown" /></button>
-          </div>
-        </div>
-        {menu === true && (
-          <div
-            className="transition ease-in duration-1000"
-            onClick={() => set_menu(false)}
-          >
-            <div className="absolute top-12 right-7 bg-gray-800 w-40 rounded-sm">
-              <div className="flex flex-col items-center justify-center">
-                <button className="out-btn" onClick={handleEdit}>Edit Profile</button>
-                <button className="out-btn" onClick={handleSignOut}>Sign Out</button>
-              </div>
-            </div>
-          </div>
-        )}
-      </nav>
-
       <main className="profile-container">
         <div className="flex-justify-center flex-col items-center my-4">
           <img className="rounded-full my-4" width="300" height="300" src="https://source.unsplash.com/random/300x300?puppy" alt="profile picture" />

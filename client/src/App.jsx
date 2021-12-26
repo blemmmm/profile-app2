@@ -4,6 +4,8 @@ import Login from './components/Login';
 import Profile from './components/Profile';
 import ProfileEdit from './components/ProfileEdit';
 import Signup from './components/Signup';
+import Navigation from './components/Navigation';
+import Admin from './components/Admin';
 import useHistory from './useHistory';
 
 function App () {
@@ -42,6 +44,9 @@ function App () {
       case '/': {
         if (user instanceof Object) {
           document.title = user.name;
+          if (history.pathname === '/' && history.previous_pathname === null) {
+            history.push('/profile');
+          }
         } else {
           document.title = 'Profile App';
         }
@@ -49,6 +54,9 @@ function App () {
       case '/signin': {
         if (user instanceof Object) {
           document.title = user.name;
+          if (history.pathname === '/signin' && history.previous_pathname === null) {
+            history.push('/profile');
+          }
         } else {
           document.title = 'Sign In';
         }
@@ -61,6 +69,9 @@ function App () {
       case '/signup': {
         if (user instanceof Object) {
           document.title = user.name;
+          if (history.pathname === '/signup' && history.previous_pathname === null) {
+            history.push('/profile');
+          }
         } else {
           document.title = 'Sign Up';
         }
@@ -68,6 +79,18 @@ function App () {
       case '/edit': {
         if (user instanceof Object) {
           document.title = 'Edit Profile';
+          if (history.pathname === '/' && history.previous_pathname === '/edit') {
+            history.push('/edit');
+          }
+        }
+      } break;
+      case '/admin': {
+        if (user instanceof Object) {
+          if (user.user_role === 'Admin') {
+            document.title = 'Admin Dashboard';
+          } else if (history.pathname === '/admin' && history.previous_pathname === null) {
+            history.push('/profile');
+          }
         }
       } break;
       default: {
@@ -81,12 +104,14 @@ function App () {
       if (user instanceof Object) {
         return (
           <div>
+            <Navigation history={history} user={user} set_user={set_user} />
             <Profile history={history} user={user} set_user={set_user}/>
           </div>
         );
       }
       return (
         <div>
+          <Navigation history={history} />
           <Homepage history={history}/>
         </div>
       );
@@ -95,6 +120,7 @@ function App () {
       if (user instanceof Object) {
         return (
           <div>
+            <Navigation history={history} user={user} set_user={set_user} />
             <Profile history={history} user={user} set_user={set_user}/>
           </div>
         );
@@ -109,11 +135,13 @@ function App () {
       if (user instanceof Object) {
         return (
           <div>
+            <Navigation history={history} user={user} set_user={set_user} />
             <Profile history={history} user={user} set_user={set_user}/>
           </div>
         );
       } return (
         <div>
+          <Navigation history={history} user={user} set_user={set_user} />
           <Homepage history={history}/>
         </div>
       );
@@ -122,6 +150,7 @@ function App () {
       if (user instanceof Object) {
         return (
           <div>
+            <Navigation history={history} user={user} set_user={set_user} />
             <Profile history={history} user={user} set_user={set_user}/>
           </div>
         );
@@ -136,17 +165,44 @@ function App () {
       if (user instanceof Object) {
         return (
           <div>
+            <Navigation history={history} user={user} set_user={set_user} />
             <ProfileEdit history={history} user={user} set_user={set_user}/>
           </div>
         );
       } return (
         <div>
+          <Navigation history={history} user={user} set_user={set_user} />
+          <Homepage history={history}/>
+        </div>
+      );
+    }
+    case '/admin': {
+      if (user instanceof Object) {
+        if (user.user_role === 'Admin') {
+          return (
+            <div>
+              <Navigation history={history} user={user} set_user={set_user} />
+              <Admin history={history} user={user} set_user={set_user}/>
+            </div>
+          );
+        } else {
+          return (
+            <div>
+              <Navigation history={history} user={user} set_user={set_user} />
+              <Profile history={history} user={user} set_user={set_user}/>
+            </div>
+          );
+        }
+      } return (
+        <div>
+          <Navigation history={history} user={user} set_user={set_user} />
           <Homepage history={history}/>
         </div>
       );
     }
     default: {
       <div>
+        <Navigation history={history} user={user} set_user={set_user} />
         <Homepage history={history}/>
       </div>;
     }

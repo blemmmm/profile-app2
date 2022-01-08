@@ -58,7 +58,7 @@ echo "--> createdb"
 createdb --host=$host --port=$port --username=$username $dbname
 
 echo "--> psql"
-psql --host=$host --port=$port --dbname=$dbname --username=$username --file=./scripts/postgresql_init.sql
+psql --host=$host --port=$port --dbname=$dbname --username=$username --file=./postgresql_init.sql
 
 echo "" > pgpass_path
 cat pgpass_path

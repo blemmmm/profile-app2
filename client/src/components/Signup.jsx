@@ -40,6 +40,7 @@ function Signup (props) {
         });
       }
     } catch (err) {
+      console.error(err);
       Swal.fire({
         title: 'ERROR',
         text: 'Sign up failed',

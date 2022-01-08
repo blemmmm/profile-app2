@@ -3,14 +3,14 @@ import { Icon } from '@iconify/react';
 
 function Navigation (props) {
   const { user } = props;
-  const [menu, set_menu] = useState(false);
   const { set_user } = props;
+  const [menu, set_menu] = useState(false);
   const path = props.history.pathname;
 
-  const handleSignIn = () => props.history.push('/signin');
-  const handleSignUp = () => props.history.push('/signup');
+  const handle_sign_in = () => props.history.push('/signin');
+  const handle_sign_up = () => props.history.push('/signup');
 
-  const handleBackorEdit = (e) => {
+  const handle_back_edit = (e) => {
     e.preventDefault();
     if (path === '/edit') {
       props.history.push('/profile');
@@ -19,7 +19,7 @@ function Navigation (props) {
     }
   };
 
-  const handleSignOut = async (e) => {
+  const handle_sign_out = async (e) => {
     e.preventDefault();
     await fetch('http://localhost:3001/logout', {
       method: 'GET',
@@ -30,7 +30,7 @@ function Navigation (props) {
     props.history.push('/');
   };
 
-  const renderNav = () => {
+  const render_navigation = () => {
 
     if (user instanceof Object) {
       const name = user.name.split(' ');
@@ -57,14 +57,14 @@ function Navigation (props) {
                   {(() => {
                     if (path === '/admin') {
                       return (
-                        <button className="out-btn" onClick={handleSignOut}>Sign Out</button>
+                        <button className="out-btn" onClick={handle_sign_out}>Sign Out</button>
 
                       );
                     } else {
                       return (
                         <div>
-                          <button className="out-btn" onClick={handleBackorEdit}>{path === '/edit' ? 'Back to Profile' : 'Edit Profile'}</button>
-                          <button className="out-btn" onClick={handleSignOut}>Sign Out</button>
+                          <button className="out-btn" onClick={handle_back_edit}>{path === '/edit' ? 'Back to Profile' : 'Edit Profile'}</button>
+                          <button className="out-btn" onClick={handle_sign_out}>Sign Out</button>
                         </div>
                       );
                     }
@@ -84,8 +84,8 @@ function Navigation (props) {
             <span className="pl-1">Profile App</span>
           </div>
           <div className="ml-3 relative">
-            <button className="in-btn" onClick={handleSignIn}>Sign in</button>
-            <button className="up-btn" onClick={handleSignUp}>Create an Account</button>
+            <button className="in-btn" onClick={handle_sign_in}>Sign in</button>
+            <button className="up-btn" onClick={handle_sign_up}>Create an Account</button>
           </div>
         </div>
       </nav>
@@ -94,7 +94,7 @@ function Navigation (props) {
   };
   return (
     <div>
-      {renderNav()}
+      {render_navigation()}
     </div>
   );
 

@@ -11,20 +11,19 @@ function ProfileEdit (props) {
   const [about_me, set_about_me] = useState(user.about_me);
   const [favorites, set_favorites] = useState(user.favorites);
 
-  const handleBack = (e) => {
+  const handle_back = (e) => {
     e.preventDefault();
     props.history.push('/profile');
   };
 
 
-  const handleSubmit = async (e) => {
+  const handle_submit = async (e) => {
     e.preventDefault();
     try {
       const response = await fetch('http://localhost:3001/edit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          'username': username,
           'name': profile_name,
           'bio': bio,
           'about_me': about_me,
@@ -49,7 +48,6 @@ function ProfileEdit (props) {
       }
 
     } catch (err) {
-      console.log(err.message);
       Swal.fire({
         title: 'ERROR',
         text: 'Edit failed',
@@ -64,7 +62,7 @@ function ProfileEdit (props) {
         <div className="flex-justify-center flex-col items-center my-4">
           <img className="rounded-full my-4" width="300" height="300" src="https://source.unsplash.com/random/300x300?puppy" alt="profile picture" />
         </div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handle_submit}>
           <div className="flex-justify-center flex-col items-center my-4">
             <div className="flex flex-col justify-between">
               <div className="flex flex-row items-center justify-between">
@@ -76,6 +74,7 @@ function ProfileEdit (props) {
                     value={username}
                     onChange={(e) => set_username(e.target.value)}
                     id="username"
+                    disabled
                   />
                   <div className="input-icon">
                     <Icon icon="ph:at-bold" />
@@ -131,7 +130,7 @@ function ProfileEdit (props) {
             ></textarea>
           </section>
           <div className="flex flex-row justify-end my-6">
-            <button className="cancel-btn" onClick={handleBack}>Cancel</button>
+            <button className="cancel-btn" onClick={handle_back}>Cancel</button>
             <button className="save-btn">Save Changes</button>
           </div>
         </form>

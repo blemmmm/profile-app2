@@ -3,8 +3,8 @@ import Swal from 'sweetalert2';
 // import assert from 'assert';
 
 function Login (props) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, set_username] = useState('');
+  const [password, set_password] = useState('');
   const { set_user } = props;
 
 
@@ -47,7 +47,6 @@ function Login (props) {
 
 
     } catch (err) {
-      console.log(err.message);
       Swal.fire({
         text: 'Network error.',
         icon: 'error',
@@ -76,7 +75,7 @@ function Login (props) {
             </label>
             <input
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => set_username(e.target.value)}
               className="input-text"
               id="username"
               type="text"
@@ -91,7 +90,7 @@ function Login (props) {
             </label>
             <input
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => set_password(e.target.value)}
               className="input-text"
               id="pw"
               type="password"

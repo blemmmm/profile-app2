@@ -2,20 +2,20 @@ import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 
 function Signup (props) {
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [username, setUsername] = useState('');
-  const [type, setType] = useState('');
+  const [full_name, set_full_name] = useState('');
+  const [email, set_email] = useState('');
+  const [password, set_password] = useState('');
+  const [username, set_username] = useState('');
+  const [type, set_type] = useState('');
 
-  const handleSubmit = async (e) => {
+  const handle_submit = async (e) => {
     e.preventDefault();
     try {
       const response = await fetch('http://localhost:3001/sign-up', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          'name': fullName,
+          'name': full_name,
           'email': email,
           'username': username,
           'password': password,
@@ -24,7 +24,6 @@ function Signup (props) {
       });
 
       const data = await response.json();
-      console.log(data);
 
       if (response.status === 200) {
         Swal.fire({
@@ -41,7 +40,6 @@ function Signup (props) {
         });
       }
     } catch (err) {
-      console.log(err.message);
       Swal.fire({
         title: 'ERROR',
         text: 'Sign up failed',
@@ -51,7 +49,7 @@ function Signup (props) {
 
   };
 
-  const handleCLick = (e) => {
+  const handle_click = (e) => {
     e.preventDefault();
     props.history.push('/signin');
   };
@@ -67,14 +65,14 @@ function Signup (props) {
         </h1>
       </div>
       <div className="signin-container">
-        <form onSubmit={handleSubmit} className="create-form">
+        <form onSubmit={handle_submit} className="create-form">
           <div className="mb-4">
             <label className="input-label" htmlFor="name">
               Full Name
             </label>
             <input
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
+              value={full_name}
+              onChange={(e) => set_full_name(e.target.value)}
               className="input-text"
               id="name"
               type="text"
@@ -88,7 +86,7 @@ function Signup (props) {
                 type="radio"
                 name="type"
                 value="Admin"
-                onChange={(e) => setType(e.target.value)}
+                onChange={(e) => set_type(e.target.value)}
                 required/>
               <span className="radio-span">Admin</span>
             </label>
@@ -97,7 +95,7 @@ function Signup (props) {
                 type="radio"
                 name="type"
                 value="User"
-                onChange={(e) => setType(e.target.value)}
+                onChange={(e) => set_type(e.target.value)}
                 required/>
               <span className="radio-span">User</span>
             </label>
@@ -108,7 +106,7 @@ function Signup (props) {
             </label>
             <input
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => set_username(e.target.value)}
               className="input-text"
               id="username"
               type="text"
@@ -122,7 +120,7 @@ function Signup (props) {
             </label>
             <input
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => set_email(e.target.value)}
               className="input-text"
               id="email"
               type="email"
@@ -136,7 +134,7 @@ function Signup (props) {
             </label>
             <input
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => set_password(e.target.value)}
               className="input-text"
               id="pw"
               type="password"
@@ -155,7 +153,7 @@ function Signup (props) {
       <div className="flex justify-center m-4">
         <h1 className="text-sm text-gray-400">
             Already have an account?&nbsp;
-          <a className="hover:text-blue-400" href="/" onClick={handleCLick}>
+          <a className="hover:text-blue-400" href="/" onClick={handle_click}>
             Click here to sign in.
           </a>
         </h1>

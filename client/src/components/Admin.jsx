@@ -5,17 +5,16 @@ import Swal from 'sweetalert2';
 function Admin () {
   const [users, set_users] = useState(null);
   const [user_data, set_user_data] = useState(null);
-  const [isOpen, setIsOpen] = useState(false);
-  const closeModal = () => setIsOpen(false);
-  const openModal = (fetched_user) => {
-    // e.preventDefault();
-    setIsOpen(true);
+  const [is_open, set_is_open] = useState(false);
+  const close_modal = () => set_is_open(false);
+  const open_modal = (fetched_user) => {
+    set_is_open(true);
     set_user_data(fetched_user);
 
   };
 
 
-  async function fetchUsers () {
+  async function fetch_users () {
     const response = await fetch('http://localhost:3001/users', {
       method: 'GET',
       credentials: 'include',
@@ -26,20 +25,19 @@ function Admin () {
 
   useEffect(() => {
     if (!users) {
-      fetchUsers().then((data) => set_users(data));
+      fetch_users().then((data) => set_users(data));
     }
   });
 
-  const renderUsers = () => {
+  const render_users = () => {
     if (users instanceof Object) {
-      console.log(users);
       const user_list = users.map((user) => {
         return (
           <div key={user.id} className="py-4 flex flex-row justify-between items-center">
             <span className="text-lg font-semibold">{user.name}</span>
             <div className="float-right">
-              <button className="bg-black hover:bg-gray-900 admin-btns mr-2" onClick={() => openModal(user)}>View Profile</button>
-              <button className="bg-red-800 hover:bg-red-900 admin-btns" onClick={() => handleDelete(user)}>Delete</button>
+              <button className="bg-black hover:bg-gray-900 admin-btns mr-2" onClick={() => open_modal(user)}>View Profile</button>
+              <button className="bg-red-800 hover:bg-red-900 admin-btns" onClick={() => handle_delete(user)}>Delete</button>
             </div>
           </div>
         );
@@ -49,7 +47,7 @@ function Admin () {
     return null;
   };
 
-  const handleDelete = (user) => {
+  const handle_delete = (user) => {
     Swal.fire({
       title: 'Are you sure?',
       text: 'You won\'t be able to revert this!',
@@ -96,14 +94,14 @@ function Admin () {
       <main className="profile-container">
         <h1 className="section-header mt-10">Users</h1>
         <div className="mt-4 text-gray-700 divide-y-2 divide-gray-100">
-          {renderUsers()}
+          {render_users()}
         </div>
       </main>
-      <Transition appear show={isOpen} as={Fragment}>
+      <Transition appear show={is_open} as={Fragment}>
         <Dialog
           as="div"
           className="fixed inset-0 z-10 overflow-y-auto"
-          onClose={closeModal}
+          onClose={close_modal}
         >
           <div className="min-h-screen px-4 text-center">
             <Transition.Child

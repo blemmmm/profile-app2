@@ -12,14 +12,7 @@ function App () {
   const history = useHistory();
   const [user, set_user] = useState(null);
 
-
-
-  useEffect(() => {
-    console.log(history.pathname, history.previous_pathname);
-    console.log('user:', user);
-  });
-
-  async function fetchSession () {
+  async function fetch_session () {
     const response = await fetch('http://localhost:3001/session', {
       method: 'GET',
       credentials: 'include',
@@ -32,7 +25,7 @@ function App () {
 
   useEffect(() => {
     if (!user) {
-      fetchSession().then((data) => set_user(data));
+      fetch_session().then((data) => set_user(data));
     }
   }, [user]);
 

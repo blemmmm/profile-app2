@@ -76,7 +76,6 @@ app.get('/session', async (request, reply) => {
    * @type {string}
    */
       // @ts-ignore
-      console.log(user);
       return reply.status(200).send(user);
     }
   }
@@ -221,7 +220,6 @@ app.post('/sign-in', async (request, reply) => {
     request.session.user_id = user.id;
     response.user = user;
     response.message = 'Authentication success.';
-    console.log(response);
     return reply.status(200).send(response);
   }
 
@@ -260,7 +258,6 @@ app.post('/edit', async (request, reply) => {
       bio = ${bio}, 
       about_me = ${about_me}, 
       favorites = ${favorites},
-      username = ${username},
       name = ${name} 
       WHERE id = ${user_id}`;
       return reply.status(200).send({ message: 'Profile Updated.' });
@@ -284,9 +281,6 @@ app.post('/delete', async (request, reply) => {
   const users = await sql`
     SELECT * FROM "users"
     WHERE user_role = 'User';`;
-
-
-
 
   return reply.status(200).send({ users, message: 'User has been deleted.' });
 

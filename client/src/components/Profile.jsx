@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 
 function Profile (props) {
-  const [randomNum] = useState(Math.floor(Math.random() * 10) + 1);
+  const [random_number] = useState(Math.floor(Math.random() * 10) + 1);
   const { user } = props;
 
 
 
 
-  const friends = new Array(randomNum);
+  const friends = new Array(random_number);
   for (let i = 0; i < friends.length; i++) {
     friends[i] = `https://source.unsplash.com/random/75x75?sig=${i}`;
   }
 
-  const renderFriends = friends.map((img, index) => {
+  const render_friends = friends.map((img, index) => {
     return <img
       key={index}
       className="relative z-30 inline object-cover w-16 h-16 border-2 border-white rounded-full"
@@ -43,9 +43,9 @@ function Profile (props) {
           <p className="items-center">{user.favorites ? user.favorites : 'No information provided.'}</p>
         </section>
         <section>
-          <h1 className="section-header">{`Friends (${randomNum})`}</h1>
+          <h1 className="section-header">{`Friends (${random_number})`}</h1>
           <div className="flex flex-row">
-            {renderFriends}
+            {render_friends}
           </div>
         </section>
         <section>

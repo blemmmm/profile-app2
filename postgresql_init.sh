@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "--> postgresql_init.sh"
+echo "--> postgresql_create.sh"
 
 if [ "$EUID" -ne 0 ]; then
   echo "Error: please run as root."
@@ -10,28 +10,55 @@ fi
 echo "--> strict mode"
 set -eu
 
-read -p "--> Enter your database name: " dbname
-if [ -z $dbname ]; then
-  echo "Error: invalid database name."
-  exit 1
+read -p "--> Enter host (localhost): " host
+if [ -z $host ]; then
+  host="localhost"
 fi
 
-echo "--> mkdir"
-echo "--> creating ./temp/"
-mkdir --parents ./temp/
+read -p "--> Enter port (5432): " port
+if [ -z $port ]; then
+  port="5432"
+fi
 
-echo "--> pg_dump"
-echo "--> dumping to ./temp/$dbname.sql"
-pg_dump --host=localhost --port=5432 --dbname=$dbname --username=postgres --password --format=custom --compress=9 --file=./temp/$dbname.sql || true
+read -p "--> Enter database (postgres): " dbname
+if [ -z $dbname ]; then
+  dbname="postgres"
+fi
+
+read -p "--> Enter username (postgres): " username
+if [ -z $username ]; then
+  username="postgres"
+fi
+
+read -p "--> Enter password (postgres): " password
+if [ -z $password ]; then
+  password="postgres"
+fi
+
+pgpass_path="$HOME/.pgpass"
+pgpass_data="$host:$port:*:$username:$password"
+echo $pgpass_data > $pgpass_path
+chmod 600 $pgpass_path
+
+pwd=$(pwd)
+timestamp=$(date +%s)
+temp_path="$pwd/temp"
+dump_path="$temp_path/$dbname-$timestamp.sql"
+
+echo "--> mkdir: $temp_path"
+mkdir --parents $temp_path
+
+echo "--> pg_dump: $dump_path"
+pg_dump --host=$host --port=$port --dbname=$dbname --username=$username --format=custom --compress=9 --file=$dump_path || true
 
 echo "--> dropdb"
-echo "--> dropping $dbname"
-dropdb --host=localhost --port=5432 --username=postgres --password $dbname || true
+dropdb --host=$host --port=$port --username=$username $dbname || true
 
 echo "--> createdb"
-echo "--> creating $dbname"
-createdb --host=localhost --port=5432 --username=postgres --password $dbname
+createdb --host=$host --port=$port --username=$username $dbname
 
 echo "--> psql"
-echo "--> initializing $dbname"
-psql --host=localhost --port=5432 --dbname=$dbname --username=postgres --password --echo-all --file=./scripts/postgresql_init.sql
+psql --host=$host --port=$port --dbname=$dbname --username=$username --file=./scripts/postgresql_init.sql
+
+echo "" > pgpass_path
+cat pgpass_path

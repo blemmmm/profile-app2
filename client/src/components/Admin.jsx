@@ -15,7 +15,7 @@ function Admin () {
 
 
   async function fetch_users () {
-    const response = await fetch('http://localhost:3001/users', {
+    const response = await fetch('/users', {
       method: 'GET',
       credentials: 'include',
     });
@@ -59,7 +59,7 @@ function Admin () {
     }).then(async (result) => {
       if (result.isConfirmed) {
 
-        const response = await fetch('http://localhost:3001/delete', {
+        const response = await fetch('/delete', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           credentials: 'include',

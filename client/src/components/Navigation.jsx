@@ -21,7 +21,7 @@ function Navigation (props) {
 
   const handle_sign_out = async (e) => {
     e.preventDefault();
-    await fetch('http://localhost:3001/logout', {
+    await fetch('/logout', {
       method: 'GET',
       credentials: 'include',
     });

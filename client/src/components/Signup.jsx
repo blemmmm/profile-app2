@@ -11,7 +11,7 @@ function Signup (props) {
   const handle_submit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:3001/sign-up', {
+      const response = await fetch('/sign-up', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

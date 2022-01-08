@@ -49,10 +49,7 @@ app.register(fastify_session, {
 });
 
 // @ts-ignore
-app.register(fastify_cors, {
-  origin: 'http://localhost:3000',
-  credentials: true,
-});
+
 
 // @ts-ignore
 app.get('/session', async (request, reply) => {

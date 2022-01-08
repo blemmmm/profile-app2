@@ -13,7 +13,7 @@ function App () {
   const [user, set_user] = useState(null);
 
   async function fetch_session () {
-    const response = await fetch('http://localhost:3001/session', {
+    const response = await fetch('/session', {
       method: 'GET',
       credentials: 'include',
     });

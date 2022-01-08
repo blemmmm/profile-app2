@@ -13,7 +13,7 @@ function Login (props) {
     // pass the user's details here
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:3001/sign-in', {
+      const response = await fetch('/sign-in', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',

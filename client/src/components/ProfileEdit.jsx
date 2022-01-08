@@ -20,7 +20,7 @@ function ProfileEdit (props) {
   const handle_submit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:3001/edit', {
+      const response = await fetch('/edit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

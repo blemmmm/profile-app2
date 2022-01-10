@@ -2,7 +2,6 @@ const assert = require('assert');
 const fastify = require('fastify').default;
 const fastify_session = require('@fastify/session');
 const fastify_cookie = require('fastify-cookie');
-const fastify_cors = require('fastify-cors');
 const fastify_static = require('fastify-static');
 const path = require('path');
 const sql = require('./db.js');

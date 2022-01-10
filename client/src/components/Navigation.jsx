@@ -37,7 +37,7 @@ function Navigation (props) {
       const first_name = name[0].toString();
 
       return (
-        <nav>
+        <nav className="sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex flex-row items-center px-1 font-semibold text-white">
               <Icon icon="gg:profile" />
@@ -77,15 +77,15 @@ function Navigation (props) {
         </nav>
       );
     } return (
-      <nav>
+      <nav className="">
         <div className="flex items-center justify-between h-16">
           <div className="flex flex-row items-center px-1 font-semibold text-white">
             <Icon icon="gg:profile" />
             <span className="pl-1">Profile App</span>
           </div>
-          <div className="ml-3 relative">
-            <button className="in-btn" onClick={handle_sign_in}>Sign in</button>
-            <button className="up-btn" onClick={handle_sign_up}>Create an Account</button>
+          <div className="ml-3 relative flex flex-row">
+            <button className="in-btn sm:px-2 md:px-4" onClick={handle_sign_in}>Sign in</button>
+            <button className="up-btn sm:px-2 md:px-4" onClick={handle_sign_up}>Create an Account</button>
           </div>
         </div>
       </nav>

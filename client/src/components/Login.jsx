@@ -9,7 +9,7 @@ function Login (props) {
 
 
 
-  const handleSubmit = async (e) => {
+  const handle_submit = async (e) => {
     // pass the user's details here
     e.preventDefault();
     try {
@@ -55,17 +55,18 @@ function Login (props) {
 
   };
 
-  const handleCLick = (e) => {
+  const handle_click = (e) => {
     e.preventDefault();
     props.history.push('/signup');
   };
+
   return (
     <div>
       <div className="title-container">
         <h1 className="text-5xl">Sign In</h1>
       </div>
       <div className="form-container">
-        <form onSubmit={handleSubmit} className="login-form">
+        <form onSubmit={handle_submit} className="login-form sm:w-80 md:w-96">
           <div className="mb-4">
             <label
               className="input-label"
@@ -106,7 +107,7 @@ function Login (props) {
         <div className="flex justify-center m-4">
           <h1 className="text-sm text-gray-400">
             Not yet registered?&nbsp;
-            <a className="hover:text-blue-400" href="/signup" onClick={handleCLick}>
+            <a className="hover:text-blue-400" href="/signup" onClick={handle_click}>
             Click here to sign up.
             </a>
           </h1>

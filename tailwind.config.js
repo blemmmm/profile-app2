@@ -17,6 +17,13 @@ const tailwind_config = {
       backgroundColor: ['disabled'],
     },
   },
+  theme: {
+    extend: {
+      screens: {
+        'sm': '250px',
+      },
+    },
+  },
 };
 
 module.exports = tailwind_config;

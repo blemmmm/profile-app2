@@ -15,7 +15,7 @@ function Profile (props) {
   const render_friends = friends.map((img, index) => {
     return <img
       key={index}
-      className="relative z-30 inline object-cover w-16 h-16 border-2 border-white rounded-full"
+      className="profile-pic sm:w-8 sm:h-8 md:w-16 md:h-16"
       width="75"
       height="75"
       src={img}
@@ -27,7 +27,7 @@ function Profile (props) {
 
   return (
     <div>
-      <main className="profile-container">
+      <main className="profile-container sm:w-11/12 xl:w-full">
         <div className="flex-justify-center flex-col items-center my-4">
           <img className="rounded-full my-4" width="300" height="300" src="https://source.unsplash.com/random/300x300?puppy" alt="profile picture" />
           <h4 className="text-gray-500">@{user.username}</h4>
@@ -50,12 +50,12 @@ function Profile (props) {
         </section>
         <section>
           <h1 className="section-header">Gallery</h1>
-          <div className="image-group">
+          <div className="image-group sm:flex-col md:flex-col lg:flex-row">
             <img className="mx-1 my-1" width="330" height="330" src="https://source.unsplash.com/random/330x330?sig=1" />
             <img className="mx-1 my-1" width="330" height="330" src="https://source.unsplash.com/random/330x330?sig=2" />
             <img className="mx-1 my-1" width="330" height="330" src="https://source.unsplash.com/random/330x330?sig=3" />
           </div>
-          <div className="image-group">
+          <div className="image-group sm:flex-col md:flex-col lg:flex-row">
             <img className="mx-1 my-1" width="330" height="330" src="https://source.unsplash.com/random/330x330?sig=4" />
             <img className="mx-1 my-1" width="330" height="330" src="https://source.unsplash.com/random/330x330?ig=5" />
             <img className="mx-1 my-1" width="330" height="330" src="https://source.unsplash.com/random/330x330?sig=6" />

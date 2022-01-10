@@ -57,8 +57,8 @@ function Signup (props) {
 
   return (
     <div>
-      <div className="flex-justify-center pt-28 pb-6">
-        <h1 className="text-5xl">Create your account</h1>
+      <div className="flex-justify-center pt-28 pb-6 sm:pt-10 md:pt-28">
+        <h1 className="text-5xl sm:text-4xl md:text-5xl">Create your account</h1>
       </div>
       <div className="flex-justify-center pb-5">
         <h1 className="text-sm text-gray-400">
@@ -66,7 +66,7 @@ function Signup (props) {
         </h1>
       </div>
       <div className="signin-container">
-        <form onSubmit={handle_submit} className="create-form">
+        <form onSubmit={handle_submit} className="create-form lg:w-2/5 md:w-2/5 sm:w-9/12">
           <div className="mb-4">
             <label className="input-label" htmlFor="name">
               Full Name

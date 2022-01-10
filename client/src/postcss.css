@@ -48,7 +48,7 @@
 }
 
 .create-form {
-    @apply p-5 border border-gray-400 rounded-md w-3/4 lg:w-3/12 sm:w-9/12;
+    @apply p-5 border border-gray-400 rounded-md w-3/12;
 }
 
 .radio-div {
@@ -64,7 +64,7 @@
 }
 
 nav {
-    @apply bg-gray-800 max-w-full mx-auto px-2 sm:px-6 lg:px-8;
+    @apply bg-gray-800 max-w-full mx-auto px-2;
 }
 
 .in-btn {
@@ -92,9 +92,7 @@ nav {
 }
 
 .profile-container {
-    max-width: 1024px;
-    width: 100%;
-    margin: 0 auto;
+    @apply max-w-screen-lg w-full mx-auto my-0;
 }
 
 .section-header {
@@ -102,7 +100,7 @@ nav {
 }
 
 .image-group {
-    @apply flex flex-row justify-center;
+    @apply flex flex-row justify-center items-center;
 }
 
 .menu {
@@ -135,6 +133,10 @@ nav {
 
 .admin-btns {
    @apply font-semibold text-white px-4 py-2 rounded;
+}
+
+.profile-pic {
+    @apply relative z-30 inline object-cover w-16 h-16 border-2 border-white rounded-full;
 }
 
 

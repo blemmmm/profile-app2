@@ -91,7 +91,7 @@ function Admin () {
 
   return (
     <div>
-      <main className="profile-container">
+      <main className="profile-container sm:w-11/12 xl:w-full">
         <h1 className="section-header mt-10">Users</h1>
         <div className="mt-4 text-gray-700 divide-y-2 divide-gray-100">
           {render_users()}

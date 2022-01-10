@@ -58,7 +58,7 @@ function ProfileEdit (props) {
 
   return (
     <div>
-      <main className="profile-container">
+      <main className="profile-container sm:w-11/12 xl:w-full">
         <div className="flex-justify-center flex-col items-center my-4">
           <img className="rounded-full my-4" width="300" height="300" src="https://source.unsplash.com/random/300x300?puppy" alt="profile picture" />
         </div>

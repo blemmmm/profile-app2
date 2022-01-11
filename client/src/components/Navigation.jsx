@@ -52,7 +52,7 @@ function Navigation (props) {
               className="transition ease-in duration-1000"
               onClick={() => set_menu(false)}
             >
-              <div className="absolute top-12 right-7 bg-gray-800 w-40 rounded-sm">
+              <div className="absolute top-12 right-4 bg-gray-800 w-40 rounded-sm">
                 <div className="flex flex-col items-center justify-center">
                   {(() => {
                     if (path === '/admin') {

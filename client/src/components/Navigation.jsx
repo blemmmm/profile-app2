@@ -37,7 +37,7 @@ function Navigation (props) {
       const first_name = name[0].toString();
 
       return (
-        <nav className="sm:px-6 lg:px-8">
+        <nav className="sm:text-sm md:text-base">
           <div className="flex items-center justify-between h-16">
             <div className="flex flex-row items-center px-1 font-semibold text-white">
               <Icon icon="gg:profile" />
@@ -77,7 +77,7 @@ function Navigation (props) {
         </nav>
       );
     } return (
-      <nav className="">
+      <nav className="sm:text-sm md:text-base">
         <div className="flex items-center justify-between h-16">
           <div className="flex flex-row items-center px-1 font-semibold text-white">
             <Icon icon="gg:profile" />

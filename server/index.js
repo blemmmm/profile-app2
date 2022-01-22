@@ -17,7 +17,7 @@ const html = `
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <link href="/dist/esbuild/esbuild.css" rel="stylesheet">
       <link href="/dist/postcss/postcss.css" rel="stylesheet">
-      <link rel="icon" type="image/x-icon" href="http://localhost:3001/favicon.ico?" />
+      <link rel="icon" type="image/x-icon" href="/favicon.ico" />
       <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
   </head>
   <body>

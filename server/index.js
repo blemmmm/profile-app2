@@ -3,6 +3,7 @@ const fastify = require('fastify').default;
 const fastify_session = require('@fastify/session');
 const fastify_cookie = require('fastify-cookie');
 const fastify_static = require('fastify-static');
+const fastify_favicon = require('fastify-favicon');
 const path = require('path');
 const sql = require('./db.js');
 
@@ -16,7 +17,7 @@ const html = `
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <link href="/dist/esbuild/esbuild.css" rel="stylesheet">
       <link href="/dist/postcss/postcss.css" rel="stylesheet">
-      <link rel="icon" type="image/x-icon" href="https://profile-app.blemmmm.xyz/favicon.ico?" />
+      <link rel="icon" type="image/x-icon" href="http://localhost:3001/favicon.ico?" />
       <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
   </head>
   <body>
@@ -31,7 +32,7 @@ app.register(fastify_static, {
   prefix: '/dist/',
 });
 
-
+app.register(fastify_favicon, { path: './', name: 'favicon.ico' });
 // @ts-ignore
 app.get('/*', async (request, reply) => {
   return reply
